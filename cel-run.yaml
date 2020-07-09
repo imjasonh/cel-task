@@ -8,4 +8,4 @@ spec:
     kind: CEL
   params:
   - name: expression
-    value: 3 == 3
+    value: "{'blue': '0x000080', 'red': '0xFF0000'}['red'] == '0xFF0000'"

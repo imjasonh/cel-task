@@ -107,7 +107,7 @@ func (c *Reconciler) ReconcileKind(ctx context.Context, r *v1alpha1.Run) reconci
 			Type:    apis.ConditionSucceeded,
 			Status:  corev1.ConditionFalse,
 			Reason:  "SyntaxError",
-			Message: "The expression could not be parsed",
+			Message: "The expression could not be parsed: " + iss.Err().Error(),
 		}})
 		return nil
 	}
@@ -121,7 +121,7 @@ func (c *Reconciler) ReconcileKind(ctx context.Context, r *v1alpha1.Run) reconci
 			Type:    apis.ConditionSucceeded,
 			Status:  corev1.ConditionFalse,
 			Reason:  "EvaluationError",
-			Message: "The expression could not be evaluated",
+			Message: "The expression could not be evaluated: " + err.Error(),
 		}})
 		return nil
 	}
@@ -132,7 +132,7 @@ func (c *Reconciler) ReconcileKind(ctx context.Context, r *v1alpha1.Run) reconci
 			Type:    apis.ConditionSucceeded,
 			Status:  corev1.ConditionFalse,
 			Reason:  "NonBoolValue",
-			Message: "The expression value was not a boolean",
+			Message: "The expression value was not a boolean: " + out.Type().TypeName(),
 		}})
 		return err
 	}
